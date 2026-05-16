@@ -42,3 +42,40 @@ Open a completely new terminal window and run:
 ```bash
 npm run test
 ```
+
+## API Routes
+
+### Authentication Routes
+- **`POST /register`** - Register a new user
+  - Validation: `registerSchema`
+  - Rate Limited: Yes (100 requests per 15 minutes)
+  
+- **`POST /login`** - Login user
+  - Validation: `loginSchema`
+  - Rate Limited: Yes (100 requests per 15 minutes)
+
+### Protected Note Routes
+All note routes require JWT authentication via `authenticateJWT` middleware.
+
+- **`GET /notes`** - Get all notes
+- **`POST /notes`** - Create a new note
+  - Validation: `createNoteSchema`
+  
+- **`GET /notes/:id`** - Get a specific note by ID
+  - Validation: `noteIdParamSchema`
+  
+- **`PUT /notes/:id`** - Update a specific note
+  - Validation: `updateNoteSchema`
+  
+- **`DELETE /notes/:id`** - Delete a specific note
+  - Validation: `noteIdParamSchema`
+  
+- **`POST /notes/:id/share`** - Share a note
+  - Validation: `shareNoteSchema`
+
+### Search Route
+- **`GET /search`** - Search notes (Protected - requires JWT)
+  - Validation: `searchSchema`
+
+### OpenAPI Documentation
+- **`GET /openapi.json`** - Get OpenAPI schema documentation
